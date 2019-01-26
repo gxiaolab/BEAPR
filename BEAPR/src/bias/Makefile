@@ -14,5 +14,5 @@ $(EXECUTABLE): $(OBJECTS)
 clean:
 	rm -rf *.bak chk *~  *.o $(EXECUTABLE)
 install:
-	cp $(EXECUTABLE) ../ASBCLIP/.
+	mv $(EXECUTABLE) ../../bin/.
 
