@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c 
 LDFLAGS= 
-SOURCES= TOK.cpp main.cpp  TextIO.cpp GenomeSegment.cpp Prep.cpp SNP.cpp
+SOURCES= TOK.cpp main.cpp  TextIO.cpp GenomeSegment.cpp Prep.cpp SNP.cpp Normalizer.cpp CrossLinker.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=bias
 all: $(SOURCES) $(EXECUTABLE)

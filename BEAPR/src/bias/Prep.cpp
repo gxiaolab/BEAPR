@@ -68,11 +68,11 @@ void Prep::sep_beds_by_chrs(std::string inBedfname, std::string tmpdir,std::stri
 	      }
 	      
 	     for(map<string,vector<string> >::iterator m_itr = PosBedMap.begin() ; m_itr != PosBedMap.end(); m_itr++){
-	      	tio.dlwrite( tmpdir+"/"+prefix+"_"+ m_itr->first+"_pos_raw.bed", m_itr->second);
+	      	tio.dlwrite( tmpdir+"/"+prefix+"_"+ m_itr->first+"_pos.bed", m_itr->second);
 	     }
 	      
 	     for(map<string,vector<string> >::iterator m_itr = NegBedMap.begin() ; m_itr != NegBedMap.end(); m_itr++){
-	      	tio.dlwrite( tmpdir+"/"+prefix+"_"+ m_itr->first+"_neg_raw.bed", m_itr->second);
+	      	tio.dlwrite( tmpdir+"/"+prefix+"_"+ m_itr->first+"_neg.bed", m_itr->second);
 	     }
 
 }

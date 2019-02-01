@@ -442,6 +442,7 @@ void CrossLinker::prior(std::string cls_dir,string seq_dir , std::string out_dir
 		string chr_name= chrVec[i];  
 		clsvec.push_back(cls_dir+"/input_pos_2_"+chr_name+".cls");
 		cmd= "touch " +  cls_dir+"/input_pos_2_"+chr_name+".cls";
+		// cout<< cmd<< endl;
 		system(cmd.c_str());
 		seqvec.push_back(seq_dir+"/"+chr_name+".fa");
 		
@@ -465,6 +466,7 @@ for(int i =0 ; i<chrVec.size(); i++){
 		string chr_name= chrVec[i];  
 		clsvec.push_back(cls_dir+"/input_neg_2_"+chr_name+".cls");
 		cmd= "touch " +  cls_dir+"/input_neg_2_"+chr_name+".cls";
+		// cout<< cmd<< endl;
 		system(cmd.c_str());
 		seqvec.push_back(seq_dir+"/"+chr_name+".fa");
 		
