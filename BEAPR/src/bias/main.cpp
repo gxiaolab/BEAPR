@@ -257,10 +257,10 @@ int main(int argc, char **argv) {
 		
 
 	ss.str("");
-	ss<<"Rscript Reg_denovo.r "+ CMDMap["TMPDIR"]+"/reg_denovo.rc "+ CMDMap["TMPDIR"]+"/test_denovo.rc "+CMDMap["OUTDIR"] +"/pred_denovo.rc "<< RepIDVec.size(); 
+	ss<<"Rscript Reg_denovo.r "+ CMDMap["TMPDIR"]+"/reg_denovo.rc "+ CMDMap["TMPDIR"]+"/test_vcf.rc "+CMDMap["OUTDIR"] +"/asb_candidates.txt "<< RepIDVec.size(); 
 	cmd=ss.str();
-	cout << cmd<< endl;
-    system(cmd.c_str());	
+	cout << cmd<< endl;	
+        system(cmd.c_str());	
 		
 
 //	
