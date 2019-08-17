@@ -1,0 +1,1488 @@
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/out/pred*
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp
+mkdir /home/yyang/projects/eCLIP/BEAPR/data/tmp
+mkdir /home/yyang/projects/eCLIP/BEAPR/data/out
+mkdir: cannot create directory ‘/home/yyang/projects/eCLIP/BEAPR/data/out’: File exists
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input.stat
+6258786 + 0 mapped (100.00%:-nan%)
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1.stat
+6.59467e+06
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2.stat
+1.06903e+07
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/input.bed /home/yyang/projects/eCLIP/BEAPR/data/input.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp input
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2.mp
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/r1.bed /home/yyang/projects/eCLIP/BEAPR/data/r1.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp r1
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/out/pred*
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp
+mkdir /home/yyang/projects/eCLIP/BEAPR/data/tmp
+mkdir /home/yyang/projects/eCLIP/BEAPR/data/out
+mkdir: cannot create directory ‘/home/yyang/projects/eCLIP/BEAPR/data/out’: File exists
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input.stat
+6258786 + 0 mapped (100.00%:-nan%)
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1.stat
+6.59467e+06
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2.stat
+1.06903e+07
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/input.bed /home/yyang/projects/eCLIP/BEAPR/data/input.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp input
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2.mp
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/r1.bed /home/yyang/projects/eCLIP/BEAPR/data/r1.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp r1
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2.mp
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/r2.bed /home/yyang/projects/eCLIP/BEAPR/data/r2.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp r2
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2.mp
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr1_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr1.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr1_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr1.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr2_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr2.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr2_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr2.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr3_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr3.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr3_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr3.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr4_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr4.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr4_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr4.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr5_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr5.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr5_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr5.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr6_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr6.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr6_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr6.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr7_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr7.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr7_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr7.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr8_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr8.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr8_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr8.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr9_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr9.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr9_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr9.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr10_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr10.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr10_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr10.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr11_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr11.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr11_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr11.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr12_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr12.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr12_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr12.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr13_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr13.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr13_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr13.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr14_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr14.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr14_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr14.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr15_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr15.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr15_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr15.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr16_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr16.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr16_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr16.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr17_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr17.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr17_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr17.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr18_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr18.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr18_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr18.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr19_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr19.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr19_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr19.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr20_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr20.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr20_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr20.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr21_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr21.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr21_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr21.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr22_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr22.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr22_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr22.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrX_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrX.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrX_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrX.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrY_pos_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrY.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrY_neg_raw.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrY.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr1_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr1_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr1.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr2_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr2_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr2.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr3_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr3_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr3.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr4_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr4_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr4.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr5_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr5_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr5.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr6_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr6_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr6.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr7_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr7_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr7.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr8_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr8_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr8.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr9_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr9_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr9.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr10_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr10_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr10.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr11_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr11_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr11.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr12_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr12_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr12.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr13_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr13_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr13.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr14_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr14_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr14.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr15_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr15_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr15.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr16_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr16_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr16.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr17_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr17_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr17.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr18_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr18_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr18.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr19_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr19_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr19.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr20_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr20_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr20.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr21_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr21_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr21.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr22_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr22_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr22.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrX_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrX_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrX.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrY_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrY_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrY.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr1_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr1_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr1.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr2_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr2_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr2.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr3_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr3_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr3.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr4_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr4_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr4.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr5_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr5_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr5.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr6_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr6_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr6.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr7_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr7_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr7.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr8_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr8_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr8.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr9_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr9_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr9.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr10_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr10_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr10.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr11_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr11_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr11.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr12_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr12_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr12.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr13_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr13_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr13.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr14_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr14_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr14.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr15_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr15_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr15.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr16_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr16_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr16.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr17_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr17_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr17.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr18_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr18_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr18.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr19_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr19_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr19.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr20_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr20_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr20.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr21_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr21_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr21.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr22_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr22_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr22.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrX_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrX_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrX.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrY_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrY_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrY.cls - 0.001
+calcPrior /home/yyang/projects/eCLIP/BEAPR/data/tmp /home/yyang/data/fasta/hg19 /home/yyang/projects/eCLIP/BEAPR/data/tmp chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22,chrX,chrY 25
+training ..... start
+read /home/yyang/data/SNP/all_SNV/chr1.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr1_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr1_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr2.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr2_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr2_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr3.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr3_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr3_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr4.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr4_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr4_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr5.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr5_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr5_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr6.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr6_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr6_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr7.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_denovo.snp
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/out/pred*
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp
+mkdir /home/yyang/projects/eCLIP/BEAPR/data/tmp
+mkdir /home/yyang/projects/eCLIP/BEAPR/data/out
+mkdir: cannot create directory ‘/home/yyang/projects/eCLIP/BEAPR/data/out’: File exists
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input.stat
+6258786 + 0 mapped (100.00%:-nan%)
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1.stat
+6.59467e+06
+samtools flagstat /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2.stat
+1.06903e+07
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/input.bed /home/yyang/projects/eCLIP/BEAPR/data/input.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp input
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/input.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2.mp
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/r1.bed /home/yyang/projects/eCLIP/BEAPR/data/r1.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp r1
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/r1.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2.mp
+./preProc /home/yyang/projects/eCLIP/BEAPR/data/r2.bed /home/yyang/projects/eCLIP/BEAPR/data/r2.bam /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp r2
+samtools view -b -f 163 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam
+samtools view -b -f 83 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_83.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_83.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup  -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools view -b -f 99 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_99.bam
+samtools view -b -f 147 /home/yyang/projects/eCLIP/BEAPR/data/r2.bam > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam
+samtools merge /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+samtools mpileup -f /home/yyang/data/fasta/hg19/hg19.fa /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam  > /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2.mp
+[mpileup] 1 samples in 1 input files
+<mpileup> Set max per-file depth to 8000
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_147.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_99.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_163.bam /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_83.bam
+rm -rf /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2.mp
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr1_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr1.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr1_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr1.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr2_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr2.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr2_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr2.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr3_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr3.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr3_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr3.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr4_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr4.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr4_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr4.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr5_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr5.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr5_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr5.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr6_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr6.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr6_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr6.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr7_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr7.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr7_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr7.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr8_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr8.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr8_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr8.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr9_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr9.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr9_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr9.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr10_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr10.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr10_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr10.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr11_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr11.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr11_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr11.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr12_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr12.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr12_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr12.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr13_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr13.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr13_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr13.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr14_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr14.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr14_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr14.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr15_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr15.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr15_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr15.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr16_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr16.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr16_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr16.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr17_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr17.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr17_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr17.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr18_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr18.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr18_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr18.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr19_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr19.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr19_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr19.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr20_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr20.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr20_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr20.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr21_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr21.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr21_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr21.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr22_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chr22.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chr22_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chr22.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrX_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrX.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrX_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrX.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrY_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_pos_2_chrY.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_chrY_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/input_neg_2_chrY.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr1_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr1_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr1.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr2_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr2_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr2.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr3_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr3_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr3.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr4_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr4_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr4.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr5_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr5_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr5.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr6_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr6_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr6.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr7_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr7_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr7.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr8_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr8_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr8.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr9_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr9_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr9.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr10_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr10_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr10.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr11_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr11_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr11.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr12_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr12_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr12.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr13_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr13_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr13.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr14_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr14_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr14.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr15_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr15_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr15.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr16_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr16_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr16.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr17_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr17_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr17.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr18_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr18_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr18.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr19_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr19_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr19.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr20_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr20_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr20.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr21_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr21_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr21.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr22_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chr22_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chr22.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrX_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrX_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrX.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrY_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_chrY_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_2_chrY.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr1_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr1_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr1.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr1.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr2_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr2_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr2.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr2.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr3_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr3_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr3.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr3.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr4_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr4_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr4.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr4.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr5_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr5_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr5.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr5.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr6_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr6_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr6.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr6.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr7_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr7_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr7.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr7.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr8_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr8_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr8.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr8.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr9_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr9_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr9.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr9.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr10_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr10_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr10.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr10.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr11_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr11_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr11.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr11.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr12_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr12_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr12.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr12.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr13_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr13_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr13.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr13.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr14_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr14_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr14.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr14.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr15_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr15_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr15.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr15.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr16_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr16_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr16.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr16.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr17_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr17_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr17.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr17.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr18_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr18_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr18.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr18.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr19_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr19_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr19.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr19.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr20_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr20_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr20.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr20.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr21_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr21_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr21.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr21.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr22_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chr22_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr22.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chr22.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrX_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrX_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrX.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrX.cls - 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrY_pos.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.cls + 0.001
+./predCLs /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_chrY_neg.bed /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrY.mp /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_2_chrY.cls - 0.001
+calcPrior /home/yyang/projects/eCLIP/BEAPR/data/tmp /home/yyang/data/fasta/hg19 /home/yyang/projects/eCLIP/BEAPR/data/tmp chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22,chrX,chrY 25
+training ..... start
+read /home/yyang/data/SNP/all_SNV/chr1.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr1_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr1_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr2.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr2_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr2_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr3.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr3_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr3_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr4.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr4_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr4_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr5.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr5_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr5_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr6.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr6_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr6_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr7.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr7_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr7_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr8.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr8_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr8_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr9.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr9_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr9_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr10.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr10_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr10_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr11.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr11_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr11_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr12.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr12_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr12_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr13.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr13_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr13_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr14.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr14_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr14_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr15.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr15_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr15_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr16.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr16_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr16_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr17.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr17_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr17_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr18.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr18_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr18_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr19.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr19_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr19_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr20.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr20_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr20_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr21.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr21_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr21_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chr22.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr22_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr22_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chrX.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrX_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrX_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.cls	10.6903
+read /home/yyang/data/SNP/all_SNV/chrY.txt
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_denovo.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_denovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrY_pos_allovdenovo.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrY_neg_allovdenovo.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_rawdenovo.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_denovo.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_denovo.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_denovo.rc
+training ..... done
+testing ..... start
+reading biallelic SNVs from the VCF file :/home/yyang/data/SNP/ENCODE/K562_0118.vcf
+for hetero. testing..... 
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr1_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr1_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr1.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr1.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr1_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr1_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr1_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr1_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr2_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr2_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr2.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr2.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr2_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr2_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr2_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr2_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr3_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr3_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr3.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr3.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr3_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr3_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr3_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr3_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr4_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr4_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr4.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr4.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr4_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr4_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr4_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr4_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr5_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr5_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr5.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr5.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr5_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr5_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr5_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr5_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr6_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr6_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr6.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr6.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr6_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr6_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr6_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr6_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr7_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr7_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr7.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr7.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr7_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr7_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr7_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr7_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr8_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr8_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr8.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr8.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr8_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr8_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr8_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr8_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr9_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr9_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr9.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr9.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr9_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr9_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr9_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr9_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr10_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr10_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr10.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr10.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr10_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr10_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr10_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr10_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr11_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr11_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr11.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr11.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr11_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr11_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr11_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr11_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr12_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr12_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr12.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr12.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr12_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr12_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr12_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr12_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr13_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr13_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr13.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr13.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr13_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr13_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr13_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr13_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr14_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr14_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr14.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr14.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr14_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr14_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr14_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr14_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr15_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr15_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr15.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr15.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr15_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr15_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr15_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr15_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr16_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr16_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr16.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr16.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr16_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr16_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr16_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr16_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr17_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr17_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr17.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr17.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr17_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr17_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr17_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr17_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr18_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr18_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr18.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr18.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr18_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr18_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr18_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr18_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr19_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr19_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr19.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr19.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr19_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr19_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr19_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr19_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr20_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr20_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr20.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr20.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr20_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr20_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr20_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr20_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr21_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr21_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr21.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr21.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr21_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr21_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr21_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr21_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr22_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chr22_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chr22.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chr22.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chr22_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chr22_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chr22_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chr22_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrX_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrX_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrX.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrX.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrX_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrX_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrX_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrX_het.rc
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_het.snp
+print : /home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_het.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrY_pos_hetov.snp
+write: /home/yyang/projects/eCLIP/BEAPR/data/tmp/chrY_neg_hetov.snp
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_2_chrY.cls	6.59467
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.cls	10.6903
+calc raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_rawhet.rc
+normalize raw RC :/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_het.rc	/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_2_chrY.cls	10.6903
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_pos_chrY_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_pos_chrY_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r1_neg_chrY_het.rc
+merge:/home/yyang/projects/eCLIP/BEAPR/data/tmp/r2_neg_chrY_het.rc
+testing ..... done
+Rscript Reg_denovo.r /home/yyang/projects/eCLIP/BEAPR/data/tmp/reg_denovo.rc /home/yyang/projects/eCLIP/BEAPR/data/tmp/test_vcf.rc /home/yyang/projects/eCLIP/BEAPR/data/out/asb_candidates.txt 2
+Warning message:
+In .doLoadActions(where, attach) :
+  trying to execute load actions without 'methods' package
+[1] 2540.89
+[1] 2.00674
+null device 
+          1 
+Warning message:
+In grid.Call.graphics(L_polygon, x$x, x$y, index) :
+  semi-transparency is not supported on this device: reported only once per page

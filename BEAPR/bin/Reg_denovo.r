@@ -98,4 +98,3 @@ out_df$pvals<-pvals
 out_df$fdr<-FDR
 #colnames(out_df) <- c("id" ,  "M_mean", "m_mean", "exp_std", "pvals","FDR")
 write.table( out_df , args[3] , quote = F,row.names =F ,sep="\t")
-
