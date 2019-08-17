@@ -1,0 +1,10 @@
+ASARP=/home/yyang/projects/eCLIP/motif/share/ASARP/K562_ASARP_ase_60_merged.txt
+PREDFILE=/home/yyang/data/eCLIP_download/K562/pred_4.0_05142018/HNRNPC_vcf.rc
+TABFILE=/home/yyang/data/annotation/UCSC_hg19/hg19_regions.tab
+OUTFILE=/home/yyang/projects/eCLIP/BEAPR/data/out/asb_post.txt
+REPEATMASK=/home/yyang/data/repeat/hg19_repeatmsk
+FASTADIR=/home/yyang/data/fasta/hg19
+TMPDIR=/home/yyang/projects/eCLIP/BEAPR/data/post_tmp
+FDR=0.1
+MINAF=0.6
+HTZONE=/home/yyang/projects/eCLIP/BEAPR/bin/K562_zone.txt
