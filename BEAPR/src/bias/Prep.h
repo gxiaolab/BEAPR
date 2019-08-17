@@ -20,9 +20,8 @@ class Prep{
 	void sep_mp_byChrms(std::string  mp_fname , std::string tmpdir , std::string prefix );	
 	void sep_reads_by_chrs(std::string fnamestr, std::string out_dir , std::string prefix);
 	void preProc(std::string inBamfname ,std::string Ref_fname ,std::string tmpdir ,std::string prefix); 	
-  void sep_beds_by_chrs(std::string inBedfname, std::string tmpdir,std::string prefix);
-  //for Gio's pipeline
-  void preProc_gio(std::string inBamfname ,std::string Ref_fname ,std::string tmpdir ,std::string prefix);	 		
+  	void sep_beds_by_chrs(std::string inBedfname, std::string tmpdir,std::string prefix);
+   	void sep_beds_by_chrs(std::string inBedfname, std::string tmpdir,std::string prefix, double rc);		
 	
 	private:
 	TextIO tio;

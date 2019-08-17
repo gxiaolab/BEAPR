@@ -50,14 +50,18 @@ int main(int argc, char **argv) {
 				
 		string VCFFLAG = CMDMap["VCFFLAG"];
      	string VCFfname = CMDMap["VCFNAME"];
-
+     	double PK_rc = atof(CMDMap["FILTERFOLDCHANGE"].c_str());
 ////init tmpdir & outdir
 
-	      
+	   	   
 	    cmd="rm -rf "+ CMDMap["OUTDIR"]+"/pred*";
 	    cout<< cmd<<endl;
 	    system(cmd.c_str());
     
+    	cmd="rm -rf "+ CMDMap["TMPDIR"];
+	    cout<< cmd<<endl;
+	    system(cmd.c_str());
+
 	    cmd="mkdir "+ CMDMap["TMPDIR"];
 	    cout<< cmd<<endl;
 	    system(cmd.c_str());
@@ -150,7 +154,7 @@ int main(int argc, char **argv) {
 		cmd="./preProc "+ RepBedVec[i] +" "+ RepBamVec[i] + " "  +CMDMap["REFSEQ"] +" " + CMDMap["TMPDIR"] + " "+RepIDVec[i];
 		cout << cmd<< endl;
 
-		pp.sep_beds_by_chrs(RepBedVec[i] , CMDMap["TMPDIR"] , RepIDVec[i] );
+		pp.sep_beds_by_chrs(RepBedVec[i] , CMDMap["TMPDIR"] , RepIDVec[i], log2(PK_rc) );
 		pp.preProc( RepBamVec[i] ,CMDMap["REFSEQ"] , CMDMap["TMPDIR"] , RepIDVec[i]);
 	}
 
@@ -162,26 +166,26 @@ int main(int argc, char **argv) {
 
 	for(int j =0 ;  j< ChrmVec.size(); j++){
 			
-			cmd = "touch " + CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_pos_raw.bed " + CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".mp";
+			cmd = "touch " + CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_pos.bed " + CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".mp";
 			system(cmd.c_str());
 					
 			ss.str("");
-			ss<< "./predCLs " <<  CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_pos_raw.bed" << " "<<CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".mp" << " " << CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".cls" << " + "<< CMDMap["CLSFDR"];
+			ss<< "./predCLs " <<  CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_pos.bed" << " "<<CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".mp" << " " << CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".cls" << " + "<< CMDMap["CLSFDR"];
 			cmd = ss.str();
 			cout<<cmd<<endl;
 //			system(cmd.c_str());
 			CrossLinker cl ; 
-			cl.predCLs(CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_pos_raw.bed", CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".mp" , CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".cls", "+" , CMDMap["CLSFDR"]  );							
+			cl.predCLs(CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_pos.bed", CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".mp" , CMDMap["TMPDIR"]+"/input_pos_2_"+ChrmVec[j]+".cls", "+" , CMDMap["CLSFDR"]  );							
 			
 			
-			cmd = "touch " + CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_neg_raw.bed " + CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".mp";
+			cmd = "touch " + CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_neg.bed " + CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".mp";
 			system(cmd.c_str());
 			
 			ss.str("");
-			ss<< "./predCLs " <<  CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_neg_raw.bed" << " "<<CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".mp" << " " << CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".cls" << " - "<< CMDMap["CLSFDR"];
+			ss<< "./predCLs " <<  CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_neg.bed" << " "<<CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".mp" << " " << CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".cls" << " - "<< CMDMap["CLSFDR"];
 			cmd = ss.str();
 			cout<<cmd<<endl;
-			cl.predCLs(CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_neg_raw.bed", CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".mp" , CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".cls", "-" , CMDMap["CLSFDR"]  );							
+			cl.predCLs(CMDMap["TMPDIR"]+"/input_"+ChrmVec[j]+"_neg.bed", CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".mp" , CMDMap["TMPDIR"]+"/input_neg_2_"+ChrmVec[j]+".cls", "-" , CMDMap["CLSFDR"]  );							
 		
 	}
 //////
